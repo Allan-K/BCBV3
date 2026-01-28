@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+
+{% block page_title %}
+<div class="row"><h2 class="display-6">Useful Links</h2></div>
+{% endblock page_title%}
+
+<div class="table-responsive">
+ 
+<table class="table table-striped">
+    <thead>
+        <th scope=""col>Description</th>
+        {% if user.is_authenticated %}
+        <th scope=""col>Link</th>
+        {% endif %}
+        <th scope=""col>Delete</th>
+
+    </thead>
+    <tbody>
+{% for link in links %}  
+            <tr>
+                <td scope="row"><small>{{ link.description }}</small></td>                
+                <td scope="row"><a href="{{ MEDIA_URL}}{{link.link_name}}" class="btn btn-secondary btn-sm" target="-blank">Click Here</a></td>
+                {% if user.is_authenticated %}
+                <td scope="row"><a href="{% url 'delete_link' link.id %}" class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure you want to delete this link?');">Delete Link</a></td>
+                {% endif %}
+            </tr>
+    </tbody>
+{% endfor %}    
+</table>
+
+
+</div>
+{% endblock content %}

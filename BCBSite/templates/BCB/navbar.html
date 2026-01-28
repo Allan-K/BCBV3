@@ -1,0 +1,75 @@
+
+      
+      <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+            </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                </li>   
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'events' %}">Events</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'links' %}">Useful Links</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'hire_us' %}">Hire Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="*">Contact</a>
+              </li>
+
+             
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'music' %}">Music</a>
+                  </li> 
+                                
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Edit
+                    </a>
+                    <ul class="dropdown-menu bg-success" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'add_tune' %}">Add a Tune</a></li>                 
+                      <li><a class="dropdown-item" href="{% url 'add_events_item' %}">Add Event</a></li>
+                      <li><a class="dropdown-item" href="{% url 'add_gallery_item' %}">Add Gallery Item</a></li>
+                      <li><a class="dropdown-item" href="{% url 'add_link' %}">Add Link Item</a></li>
+                      <li><a class="dropdown-item" href="{% url 'add_testimonial_item' %}">Add Testimonial</a></li>
+                      {% if user.is_superuser %}
+                      <li><a class="dropdown-item" href="*">Update Password</a></li>                      
+                      <li><a class="dropdown-item" href="*">Add a User</a></li>
+                      {% endif %}
+                    </ul> 
+                  </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'confirm' %}">Logout</a>
+              </li> 
+
+              <li class="nav-item right">
+                <a class="nav-link" href="#">Welcome {{user.username|capfirst}}</a>
+              </li> 
+              {% else %}
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>   
+               {% endif %}
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+
+{% block page_title %}
+<div class="row"><h2 class="display-6">Music Catalogue</h2>{% include 'BCB/search_music.html' %}</div>
+{% endblock page_title%}
+
+
+
+<div class="table-responsive">
+    
+<table class="table table-striped">
+    <thead>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">File</th>
+    </thead>
+    <tbody>
+        {% for tune in items_page %}
+
+                <tr>               
+                    <td scope="row">{{ tune.title }}</td>
+                    <td scope="row"><small>{{ tune.description }}</small></td>
+                    <td scope="row"><a href="{{ MEDIA_URL}}{{tune.file}}" class="btn btn-secondary btn-sm" target="-blank">Download PDF</a></td>
+                </tr>
+                
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include 'BCB/pagination.html' %}
+<br>
+</div>
+{% endblock content %}

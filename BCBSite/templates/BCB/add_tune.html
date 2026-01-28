@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% block page_title %}
+<h2 class="display-6">Add a Tune</h2>
+{% endblock page_title%}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% endif %}
+
+<div class="container mt-2">
+    <div class=""form-group>
+        <form method='POST' action='{% url "add_tune" %}' enctype="multipart/form-data">
+            {% csrf_token %}
+            
+
+            <div class="row ">
+
+                <div class="col-3 mt-3 ">
+                    {{form.title.label_tag}} 
+                    {{form.title}}
+                </div>            
+                <div class="col-3 mt-3 ">
+                    {{form.tune_type.label_tag}}
+                    {{form.tune_type}}
+                </div>
+                <div class="col-3 mt-3 ">
+                    {{form.is_set.label_tag}}
+                    {{form.is_set}}
+                </div>
+                <div class="col-3 mt-3 ">
+                    {{form.moderated.label_tag}}
+                    {{form.moderated}}
+                </div> 
+            </div>
+            <div class="row" >
+                <div class="col-12 mt-3 ">
+                    {{form.description.label_tag}}
+                    {{form.description}}
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3 ">
+                    {{form.file}}
+                </div> 
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary">Save Update</button>
+            <br>
+
+
+    </div>
+   
+
+    </form>
+</div>
+<br>
+{% endblock content %}
