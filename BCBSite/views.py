@@ -1,21 +1,22 @@
+from urllib import request
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login
 #from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from .forms import CustomUserCreationForm, TestimonialsForm, EventsForm, LinkForm, GalleryForm
+from .forms import CustomUserCreationForm, TestimonialsForm, EventsForm, LinkForm, GalleryForm, SongsForm
 from .models import Songs, Testimonials, Events, Links, Gallery
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.http import HttpResponse, Http404, FileResponse
-from BCBSite.forms import SongsForm
+from django.utils import timezone
 
 def index (request):
-    #flyer = News.objects.all().order_by('-article_created_at')[:1]
+    flyer = Events.objects.all().order_by('-article_created_at')[:1]
     #time = timezone.now().timestamp()
-    #print(flyer)
-    #print(timezone.now())
-    return render(request, 'BCB/index.html')
+    print(flyer)
+    print(timezone.now())
+    return render(request, 'BCB/index.html', {"flyer":flyer})
 
 def confirm(request):
     return render(request, "registration/confirm.html")
@@ -258,3 +259,6 @@ def edit_gallery(request, id):
 def hire_us(request):
 
     return render(request, 'BCB/hire_us.html', {})
+
+def view_404(request):
+    return render(request, 'BCB/404.html', status=404)

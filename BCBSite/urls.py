@@ -26,6 +26,7 @@ urlpatterns = [
     path('edit_gallery/<int:id>', views.edit_gallery, name='edit_gallery'),
     path('delete_gallery_item/<int:id>', views.delete_gallery_item, name='delete_gallery_item'),
     path('hire_us/', views.hire_us, name='hire_us'),
+    path('404/', views.view_404, name='view_404'),
 ]
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

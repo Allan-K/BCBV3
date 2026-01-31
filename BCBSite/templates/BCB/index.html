@@ -5,7 +5,7 @@
 
 <div class="container mt-2">
     <div class="row">
-        <div class="col-sm-6">Brampton Community Band of twenty or so musicians play a range of acoustic melody and rhyme instruments.  Our repertoire includes English, Celtic, French, Québécois and Scandi folk and dance tunes, traditional and modern. We organise several of our own ceilidhs each year in Chesterfield where we teach and call dances that everybody can join in with.  We are also delighted when we are hired to play at community barn dances, private parties, birthdays and weddings. Aside from our regular rehearsal, on the third Thursday of each month we all meet at The Victoria Inn, S40 3QY for a traditional pub session. 
+        <div class="col-sm-6">Brampton Community Band of twenty or so musicians play a range of acoustic melody and rhythm instruments.  Our repertoire includes English, Celtic, French, Québécois and Scandi folk and dance tunes, traditional and modern. We organise several of our own ceilidhs each year in Chesterfield where we teach and call dances that everybody can join in with.  <br><br>We are also delighted when we are hired to play at community barn dances, private parties, birthdays and weddings. <br><br>Aside from our regular rehearsal, on the third Thursday of each month we all meet at The Victoria Inn, S40 3QY for a traditional pub session. 
         </div>
         <div class="col-sm-6">
             <img src="{% static 'frontImage.jpg' %}" alt="Band photo at Ashover" class="img-fluid">
@@ -21,8 +21,8 @@
   
     {% for i in flyer %}
 
-    {{ i.expire }}
-    {% if i.expire|date:"dmYHis" < day|date:"dmYHis" %}
+
+    {% if i.expire|date:"dmYHis" > day|date:"dmYHis" %}
     <img src="{% get_media_prefix %}{{ i.image_file }}" alt="Next Event">
     {% else %}
     <img src="{{ 'uploads/images/Default.jpg' }}" alt="Expired Flyer">
