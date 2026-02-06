@@ -69,7 +69,7 @@ def search_music(request):
         else:
             items_page = Songs.objects.filter(title__startswith = value)
             print('score2', items_page)
-        return render(request, "music.html", {'items_page':items_page})
+        return render(request, "BCB/music.html", {'items_page':items_page})
     
 def add_tune(request):
     if request.user.is_authenticated:
@@ -87,7 +87,23 @@ def add_tune(request):
         return render(request, 'BCB/add_tune.html', {'form':form})
     else:
         messages.success(request, "Please log to access this page")
-        return render(request, 'login.html')    
+        return render(request, 'login.html')  
+
+def edit_music(request, id):
+    if request.user.is_authenticated:
+        tune = Songs.objects.get(id=id)
+        if request.method == 'POST':
+            form = SongsForm(request.POST, instance=tune)
+            if form.is_valid():
+                form.save()
+                return redirect('music') # prepopulate the form with an existing band
+        else:
+            form = SongsForm(instance=tune)
+                
+        return render(request, 'BCB/edit_music.html',{'form': form})
+    else:
+        messages.success(request, "Please log to access this page")
+        return render(request, 'login.html')   
 
 def delete_tune(request, id):
     if request.user.is_authenticated:

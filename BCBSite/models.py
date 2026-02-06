@@ -7,8 +7,10 @@ class Songs(models.Model):
     TUNETYPE = (
         ('N/A', 'N/A'),
         ('Jig', 'Jig'),
+        ('Slip Jig', 'Slip_Jig'),
         ('Reel', 'Reel'),
         ('Polka', 'Polka'),
+        ('Hornpipe', 'Hornpipe'),
         ('Listening Tune', 'Listening_Tune')
     )
 
