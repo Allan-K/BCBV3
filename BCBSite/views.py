@@ -13,17 +13,14 @@ from django.utils import timezone
 
 def index (request):
     flyer = Events.objects.all().order_by('-article_created_at')[:1]
-    #time = timezone.now().timestamp()
-    print(flyer)
-    print(timezone.now())
-    return render(request, 'BCB/index.html', {"flyer":flyer})
+    time = timezone.now().timestamp()
+    return render(request, 'BCB/index.html', {"flyer":flyer, 'time':time})
 
 def confirm(request):
     return render(request, "registration/confirm.html")
 
 def dashboard(request):
     return render(request, "registration/login.html")
-
 def sign_up(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)

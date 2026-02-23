@@ -18,6 +18,7 @@ class Songs(models.Model):
     description = models.TextField(blank=True)
     tune_type = models.CharField(max_length=25, choices=TUNETYPE)
     file = models.FileField(upload_to="songs/")
+    archived = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['id']
