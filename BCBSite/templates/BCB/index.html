@@ -3,7 +3,25 @@
 
 {% block content %}
 
-<div class="container mt-2">
+<div id="splash"> 
+  
+    {% for i in flyer %}
+
+    {% if i.expire.timestamp > time %}
+
+    <img src="{% get_media_prefix %}{{ i.image_file }}" alt="Next Event">
+    {% else %}
+    <img src="{{ 'uploads/images/Default.jpg' }}" alt="Expired Flyer">
+    {% endif %}
+    
+
+    {% endfor %}
+    Go to events page for more details.
+
+</div>
+
+
+<div id="content" class="container mt-2 content-hidden">
     <div class="row">
         <div class="col-sm-6">Brampton Community Band of twenty or so musicians play a range of acoustic melody and rhythm instruments.  Our repertoire includes English, Celtic, French, Québécois and Scandi folk and dance tunes, traditional and modern. We organise several of our own ceilidhs each year in Chesterfield where we teach and call dances that everybody can join in with.  <br><br>We are also delighted when we are hired to play at community barn dances, private parties, birthdays and weddings. <br><br>Aside from our regular rehearsal, on the third Thursday of each month we all meet at The Victoria Inn, S40 3QY for a traditional pub session. 
         </div>
@@ -17,21 +35,7 @@
 <br>
 <br>
 
-<div class="splash fade-in"> 
-  
-    {% for i in flyer %}
 
-    {% if i.expire.timestamp > time %}
-
-    <img src="{% get_media_prefix %}{{ i.image_file }}" alt="Next Event">
-    {% else %}
-    <img src="{{ 'uploads/images/Default.jpg' }}" alt="Expired Flyer">
-    {% endif %}
-    
-
-    {% endfor %}
-
-</div>
 
 {% if user.is_authenticated %}
 
@@ -39,19 +43,29 @@
 
 {% endif %}
 
-</div>
+
 <script>
     
-    const splash = document.querySelector('.splash');
-    document.addEventListener('DOMContentLoaded', (e)=>{
-        setTimeout(()=>{
-            splash.classList.add('display-none');
-        }, 7000); 
-    splash.addEventListener('click', (e)=>{
-        splash.classList.add('hidden');    
-    },610);
-    });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const splash = document.getElementById('splash');
+    const content = document.getElementById('content');
+
+    // Check if the user has seen the splash screen before
+    if (!sessionStorage.getItem('hasVisited')) {
+        // First visit: Show splash, then hide it after 5 seconds
+        setTimeout(() => {
+            splash.classList.add('splash-hidden');
+            content.classList.remove('content-hidden');
+            // Store the flag
+            sessionStorage.setItem('hasVisited','true');
+        }, 5000); // 5000ms = 5 seconds
+    } else {
+        // Returning user: Hide splash immediately
+        splash.style.display = 'none';
+        content.classList.remove('content-hidden');
+    }
+});
 </script>
 
 {% endblock content %}
-
